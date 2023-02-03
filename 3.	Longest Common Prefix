@@ -1,0 +1,53 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+char * longestCommonPrefix(char ** strs, int strsSize)
+{
+ char *s;
+ s = (char*)calloc(200, sizeof(char));
+ int min_str=200;
+ for(int i=0; i<strsSize; i++)
+ {
+   if(min_str>strlen(strs[i]))
+   {
+     min_str=strlen(strs[i]);
+   }
+ }
+ if(min_str==0)
+ {
+   return "";
+ }
+ else
+ {
+   for(int i=0; i<min_str; i++)
+   {
+      int a=0;
+      char ch=strs[0][i];
+      for(int j=0; j<strsSize; j++)
+      {
+        if(strs[j][i]==ch)
+        {
+          a++;
+        }
+      }
+      if(a==strsSize)
+      {
+        s[i]=strs[0][i];
+      }
+      else
+      {
+        break;
+      }
+   }
+   return s;
+ }
+}
+int main()
+{
+  char *strs[10] = {"flower","flow","flight"};
+  int len;
+  printf("Enter number strings : ");
+  scanf("%d", &len);
+  char *res = longestCommonPrefix(strs, len);
+  printf(" Longest substring is : %s", res);
+}
